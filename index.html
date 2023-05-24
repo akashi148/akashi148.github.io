@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ChatPin</title>
+    <title>Chat</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         #chatbox {
@@ -32,9 +32,11 @@
     <div id="chatbox"></div>
     <input id="userinput" class="form-control" type="text">
     <button class="btn btn-primary mt-3" onclick="sendMessage()">Send</button>
-    <div id="loading">...</div>
+    <div id="loading">.</div>
     
     <script>
+        var loadingAnimation;
+        
         async function sendMessage() {
             var input = document.getElementById("userinput").value;
             if (!input.trim()) {
@@ -46,6 +48,16 @@
             
             // Show loading
             document.getElementById("loading").style.display = "block";
+            var dots = 1;
+            loadingAnimation = setInterval(function() {
+                if(dots < 4) {
+                    document.getElementById("loading").innerText += '.';
+                    dots++;
+                } else {
+                    document.getElementById("loading").innerText = '.';
+                    dots = 1;
+                }
+            }, 500);
             
             // Fetching response from OpenAI API
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -65,7 +77,11 @@
             const message = data['choices'][0]['message']['content'];
             
             // Hide loading
+            clearInterval(loadingAnimation);
             document.getElementById("loading").style.display = "none";
+            
+            // Debugging data
+            console.log('Received response from OpenAI: ', data);
             
             chatbox.innerHTML += '<div class="message"><span class="ai-message">AI: </span>' + message + '</div>';
             document.getElementById("userinput").value = "";
