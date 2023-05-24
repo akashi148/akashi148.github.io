@@ -17,21 +17,21 @@
     <button onclick="sendMessage()">Send</button>
     
     <script>
-        async function sendMessage() {
+        function sendMessage() {
             var input = document.getElementById("userinput").value;
-            <!--
-            var response = await fetch('https://your-python-server.com/message', {
-                method: 'POST',
-                body: JSON.stringify({ 'message': input }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            -->
-            var response = "hi"
-            
-            var data = await response.json();
             var chatbox = document.getElementById("chatbox");
+            
+            var response;
+            if (input.toLowerCase() === "hello") {
+                response = "Hello!";
+            } else if (input.toLowerCase() === "world") {
+                response = "World!";
+            } else {
+                response = "I can only respond to 'Hello' or 'World'";
+            }
+            
             chatbox.innerHTML += "User: " + input + "<br>";
-            chatbox.innerHTML += "AI: " + data.response + "<br>";
+            chatbox.innerHTML += "AI: " + response + "<br>";
             document.getElementById("userinput").value = "";
             chatbox.scrollTop = chatbox.scrollHeight;
         }
