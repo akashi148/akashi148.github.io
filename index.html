@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ChatPin</title>
+    <title>Chat with AI</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ededed;
+        }
         #chatbox {
-            width: 100%;
+            width: 300px;
             height: 400px;
             border: 1px solid #dee2e6;
             border-radius: .25rem;
             overflow: auto;
             padding: 15px;
-            margin-bottom: 15px;
+            background-color: #fff;
         }
         .message {
             margin-bottom: 10px;
         }
         .user-message {
             font-weight: bold;
+            text-align: right;
         }
         .ai-message {
             font-weight: bold;
@@ -25,21 +33,24 @@
         }
     </style>
 </head>
-<body class="container py-5">
+<body>
     <div id="chatbox"></div>
-    <input id="userinput" class="form-control" type="text">
+    <input id="userinput" class="form-control mt-3" type="text">
     <button class="btn btn-primary mt-3" onclick="sendMessage()">Send</button>
     
     <script>
         function sendMessage() {
             var input = document.getElementById("userinput").value;
-            var chatbox = document.getElementById("chatbox");
-            
+            if (!input.trim()) {
+                return; // If the input is empty or only contains spaces, don't send the message
+            }
+
+            var chatbox = document.getElementById("chatbox");            
             var responses = ["Hello", "World"];
             var response = responses[Math.floor(Math.random() * responses.length)];
             
-            chatbox.innerHTML += '<div class="message"><span class="user-message">User: </span>' + input + '</div>';
-            chatbox.innerHTML += '<div class="message"><span class="ai-message">ChatPin: </span>' + response + '</div>';
+            chatbox.innerHTML += '<div class="message user-message">User: ' + input + '</div>';
+            chatbox.innerHTML += '<div class="message ai-message">AI: ' + response + '</div>';
             document.getElementById("userinput").value = "";
             chatbox.scrollTop = chatbox.scrollHeight;
         }
