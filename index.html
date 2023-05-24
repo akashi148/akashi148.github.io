@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat</title>
+    <title>ChatPin</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         #chatbox {
@@ -23,23 +23,29 @@
             font-weight: bold;
             color: #007bff;
         }
+        #loading {
+            display: none;
+        }
     </style>
 </head>
 <body class="container py-5">
     <div id="chatbox"></div>
     <input id="userinput" class="form-control" type="text">
     <button class="btn btn-primary mt-3" onclick="sendMessage()">Send</button>
+    <div id="loading">...</div>
     
     <script>
-        function sendMessage() {
+        async function sendMessage() {
             var input = document.getElementById("userinput").value;
             if (!input.trim()) {
                 return; // If the input is empty or only contains spaces, don't send the message
             }
             var chatbox = document.getElementById("chatbox");
             
-            // var responses = ["Hello", "World"];
-            // var response = responses[Math.floor(Math.random() * responses.length)];
+            chatbox.innerHTML += '<div class="message"><span class="user-message">User: </span>' + input + '</div>';
+            
+            // Show loading
+            document.getElementById("loading").style.display = "block";
             
             // Fetching response from OpenAI API
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -58,7 +64,9 @@
             const data = await response.json();
             const message = data['choices'][0]['message']['content'];
             
-            chatbox.innerHTML += '<div class="message"><span class="user-message">User: </span>' + input + '</div>';
+            // Hide loading
+            document.getElementById("loading").style.display = "none";
+            
             chatbox.innerHTML += '<div class="message"><span class="ai-message">AI: </span>' + message + '</div>';
             document.getElementById("userinput").value = "";
             chatbox.scrollTop = chatbox.scrollHeight;
