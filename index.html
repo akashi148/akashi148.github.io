@@ -38,8 +38,22 @@
             }
             var chatbox = document.getElementById("chatbox");
             
-            var responses = ["Hello", "World"];
-            var response = responses[Math.floor(Math.random() * responses.length)];
+            // var responses = ["Hello", "World"];
+            // var response = responses[Math.floor(Math.random() * responses.length)];
+            
+            // Fetching response from OpenAI API
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer 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'
+              },
+              body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: input }],
+                temperature: 0.7
+              })
+            });
             
             chatbox.innerHTML += '<div class="message"><span class="user-message">User: </span>' + input + '</div>';
             chatbox.innerHTML += '<div class="message"><span class="ai-message">AI: </span>' + response + '</div>';
