@@ -39,7 +39,7 @@
             var response = responses[Math.floor(Math.random() * responses.length)];
             
             chatbox.innerHTML += '<div class="message"><span class="user-message">User: </span>' + input + '</div>';
-            chatbox.innerHTML += '<div class="message"><span class="ai-message">AI: </span>' + response + '</div>';
+            chatbox.innerHTML += '<div class="message"><span class="ai-message">ChatPin: </span>' + response + '</div>';
             document.getElementById("userinput").value = "";
             chatbox.scrollTop = chatbox.scrollHeight;
         }
