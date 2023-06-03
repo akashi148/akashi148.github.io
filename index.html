@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chatting</title>
+    <title>ChatPin</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         #chatbox {
@@ -47,17 +47,17 @@
             chatbox.innerHTML += '<div class="message"><span class="user-message">User: </span>' + input + '</div>';
             
             // Show loading
-            document.getElementById("loading").style.display = "block";
-            var dots = 1;
-            loadingAnimation = setInterval(function() {
-                if(dots < 4) {
-                    document.getElementById("loading").innerText += '.';
-                    dots++;
-                } else {
-                    document.getElementById("loading").innerText = '.';
-                    dots = 1;
-                }
-            }, 500);
+            //document.getElementById("loading").style.display = "block";
+            //var dots = 1;
+            //loadingAnimation = setInterval(function() {
+            //    if(dots < 4) {
+            //        document.getElementById("loading").innerText += '.';
+            //        dots++;
+            //    } else {
+            //        document.getElementById("loading").innerText = '.';
+            //        dots = 1;
+            //    }
+            //}, 500);
             
 
             // Encode the input as URI component
