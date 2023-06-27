@@ -50,6 +50,12 @@
         background-color: #dee2e6;
         color: black;
     }
+        
+    .user-message-icon, .ai-message-icon {
+        height: 24px;
+        width: 24px;
+        margin-right: 5px;
+    }
     </style>
 </head>
 <body class="container py-5">
@@ -85,7 +91,7 @@
             }
             var chatbox = document.getElementById("chatbox");
             
-            chatbox.innerHTML += '<div class="message"><span class="user-message">User: </span>' + input + '</div>';
+            chatbox.innerHTML += '<div class="message"><img src="icon-usr.png" class="user-message-icon"><span class="user-message">User: </span>' + input + '</div>';
             
             // Encode the input as URI component
             var encodedInput = encodeURIComponent(input);
