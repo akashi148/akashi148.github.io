@@ -26,6 +26,11 @@
         #loading {
             display: none;
         }
+        .ai-message-icon {
+            height: 24px;
+            width: 24px;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body class="container py-5">
@@ -63,20 +68,6 @@
             
             chatbox.innerHTML += '<div class="message"><span class="user-message">User: </span>' + input + '</div>';
             
-            // Show loading
-            //document.getElementById("loading").style.display = "block";
-            //var dots = 1;
-            //loadingAnimation = setInterval(function() {
-            //    if(dots < 4) {
-            //        document.getElementById("loading").innerText += '.';
-            //        dots++;
-            //    } else {
-            //        document.getElementById("loading").innerText = '.';
-            //        dots = 1;
-            //    }
-            //}, 500);
-            
-
             // Encode the input as URI component
             var encodedInput = encodeURIComponent(input);
             
@@ -87,14 +78,10 @@
             const data = await response.json();
             const message = data['choices'][0]['message']['content'];
             
-            // Hide loading
-            clearInterval(loadingAnimation);
-            document.getElementById("loading").style.display = "none";
-            
             // Debugging data
             console.log('Received response from OpenAI: ', data);
             
-            chatbox.innerHTML += '<div class="message"><span class="ai-message">ChatPin: </span>' + message + '</div>';
+            chatbox.innerHTML += '<div class="message"><img src="icon-pin.png" class="ai-message-icon"><span class="ai-message">' + message + '</span></div>';
             document.getElementById("userinput").value = "";
             chatbox.scrollTop = chatbox.scrollHeight;
         }
@@ -109,7 +96,7 @@
         ];
     
         for (var i = 0; i < messages.length; i++) {
-            chatbox.innerHTML += '<div class="message"><span class="ai-message">ChatPin: </span>' + messages[i] + '</div>';
+            chatbox.innerHTML += '<div class="message"><img src="icon-pin.png" class="ai-message-icon"><span class="ai-message">' + messages[i] + '</span></div>';
         }
     
         chatbox.scrollTop = chatbox.scrollHeight;
