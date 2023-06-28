@@ -100,10 +100,19 @@
         font-weight: bold;
     }
 
+    #logo {
+        display: block;
+        width: 100%; /* Adjust as needed */
+        height: auto;
+        max-width: 1000px; /* Original image width */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     </style>
 </head>
 <body class="container py-5">
-    <h1>ChatPin</h1>
+    <img id="logo" src="logo.png" alt="Logo">
     <div id="chatbox"></div>
     <input id="userinput" class="form-control" type="text">
     <div class="d-flex justify-content-center mt-3">
