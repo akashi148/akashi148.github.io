@@ -109,16 +109,17 @@
             var encodedInput = encodeURIComponent(input);
             
             // Insert the encoded input into the URL
-            const response = await fetch('https://zpaiszcqbc3ywz76sj7rnu22ou0juvgn.lambda-url.us-east-1.on.aws?key1=' + encodedInput) // Lambda
+            try {
+                const response = await fetch('https://zpaiszcqbc3ywz76sj7rnu22ou0juvgn.lambda-url.us-east-1.on.aws?key1=' + encodedInput) // Lambda
+                // Display the response
+                const data = await response.json();
+                const message = data['choices'][0]['message']['content'];
+                chatbox.innerHTML += '<div class="message"><img src="icon-pin.png" class="ai-message-icon"><span class="ai-message">' + message + '</span></div>';
+            } catch (error) {
+                console.error('An error occurred:', error);
+                chatbox.innerHTML += '<div class="message"><img src="icon-pin.png" class="ai-message-icon"><span class="ai-message">' + 'エラーが発生しました。' + '</span></div>';
+            }
             
-            // Display the response
-            const data = await response.json();
-            const message = data['choices'][0]['message']['content'];
-            
-            // Debugging data
-            console.log('Received response from OpenAI: ', data);
-            
-            chatbox.innerHTML += '<div class="message"><img src="icon-pin.png" class="ai-message-icon"><span class="ai-message">' + message + '</span></div>';
             document.getElementById("userinput").value = "";
             chatbox.scrollTop = chatbox.scrollHeight;
         }
