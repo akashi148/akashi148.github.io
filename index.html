@@ -118,7 +118,7 @@
                 chatbox.innerHTML += '<div class="message"><img src="icon-pin.png" class="ai-message-icon"><span class="ai-message">' + message + '</span></div>';
             } catch (error) {
                 console.error('An error occurred:', error);
-                chatbox.innerHTML += '<div class="message"><img src="icon-pin.png" class="ai-message-icon"><span class="ai-message">' + 'エラーが発生しました。' + '</span></div>';
+                chatbox.innerHTML += '<div class="message"><img src="icon-pin.png" class="ai-message-icon"><span class="ai-message">' + 'Error: Timeout' + '</span></div>';
             }
             
             document.getElementById("userinput").value = "";
